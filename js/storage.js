@@ -92,6 +92,8 @@ function addChecklistItem(item) {
     if (item.reminderDate) existing.reminderDate = item.reminderDate;
     if (item.price) existing.price = item.price;
     if (item.notes) existing.notes = item.notes;
+    if (item.link) existing.link = item.link;
+    if (item.image) existing.image = item.image;
     saveChecklist(list);
     return { added: false, updated: true, item: existing };
   }
@@ -107,6 +109,8 @@ function addChecklistItem(item) {
     reminderDate: item.reminderDate || null,
     price:        item.price ? parseFloat(item.price) : null,
     notes:        item.notes || '',
+    link:         item.link || '#',
+    image:        item.image || '',
     completed:    false,
     createdAt:    new Date().toISOString(),
   };

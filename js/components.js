@@ -412,17 +412,21 @@ function highlightMatch(text, query) {
 function renderCategoryCard(slug, meta, href) {
   const itemCount = (ITEMS[slug] || []).length;
   const bgClass = `cat-bg-${slug}`;
+  const targetHref = href || meta.link || `category/${slug}.html`;
 
   return `
-    <a href="${href}" class="category-card fade-in stagger-item" aria-label="${meta.name} — ${itemCount} items" role="listitem">
-      <div class="category-card-image ${bgClass}" style="display:flex;align-items:center;justify-content:center;">
-        <span style="font-size:60px;filter:drop-shadow(2px 4px 6px rgba(181,18,43,0.2));">${meta.icon}</span>
+    <a href="${targetHref}" class="category-card fade-in stagger-item" aria-label="${meta.name} — ${itemCount} items" role="listitem">
+      <div class="category-card-image ${bgClass}">
+        ${meta.image ? `<img src="${meta.image}" alt="${meta.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />` : ''}
+        <div class="cat-image-fallback" style="${meta.image ? 'display:none;' : ''}">
+          <span style="font-size:60px;filter:drop-shadow(2px 4px 6px rgba(181,18,43,0.2));">${meta.icon}</span>
+        </div>
         <div class="cat-icon-overlay" aria-hidden="true" style="background:rgba(255,255,255,0.9);">
           <span style="font-size:14px;">✦</span>
         </div>
       </div>
       <div class="category-card-body">
-        <div class="category-card-name">${meta.name}</div>
+        <div class="category-card-name">${meta.name} <span class="cat-card-arrow" aria-hidden="true">→</span></div>
         <div class="category-card-count">${itemCount} essentials</div>
       </div>
     </a>

@@ -184,6 +184,8 @@ function renderChecklistGroups(active, done) {
    ──────────────────────────────────────────────────────────── */
 function renderChecklistItem(item) {
   const prioClasses = { High: 'badge-high', Medium: 'badge-medium', Low: 'badge-low' };
+  const itemLink = item.link || '#';
+  const hasCustomLink = itemLink && itemLink !== '#';
 
   return `
     <div class="checklist-item ${item.completed ? 'completed' : ''}" id="item-${item.id}" data-id="${item.id}">
@@ -197,7 +199,14 @@ function renderChecklistItem(item) {
         />
       </div>
       <div class="checklist-item-content">
-        <div class="checklist-item-name">${item.name}</div>
+        <div class="checklist-item-name">
+          <a href="${itemLink}" class="checklist-item-link" ${hasCustomLink ? 'target="_blank" rel="noopener noreferrer"' : ''} title="${hasCustomLink ? 'Open product link' : 'Item link'}">
+            ${item.name}
+          </a>
+          <a href="${itemLink}" class="checklist-item-ext-link ${hasCustomLink ? 'active-link' : ''}" ${hasCustomLink ? 'target="_blank" rel="noopener noreferrer"' : ''} title="${hasCustomLink ? 'Open product link: ' + itemLink : 'No custom link inserted (Click to open #)'}">
+            🔗
+          </a>
+        </div>
         <div class="checklist-item-meta">
           <span class="checklist-item-meta-tag">📁 ${item.category}</span>
           <span class="checklist-item-meta-tag">📦 ${item.quantity}${item.unit ? ' ' + item.unit : ''}</span>
@@ -205,6 +214,7 @@ function renderChecklistItem(item) {
           <span class="badge ${prioClasses[item.priority] || 'badge-medium'}">${item.priority}</span>
           ${item.reminderDate ? `<span class="checklist-item-meta-tag">🔔 ${formatDate(item.reminderDate)}</span>` : ''}
           ${item.price ? `<span class="checklist-item-meta-tag">$${(item.price * item.quantity).toFixed(2)}</span>` : ''}
+          ${hasCustomLink ? `<a href="${itemLink}" target="_blank" rel="noopener noreferrer" class="checklist-item-meta-tag link-tag">🌐 Product Link</a>` : ''}
           ${item.notes ? `<span class="checklist-item-meta-tag" title="${item.notes}">📝 Note</span>` : ''}
         </div>
       </div>
@@ -347,6 +357,10 @@ function openAddItemModal() {
         <input type="date" class="form-input" id="ai-custom-reminder" style="display:none; margin-top:6px" />
       </div>
       <div class="form-group">
+        <label class="form-label" for="ai-link">Item Link / URL (optional)</label>
+        <input type="url" class="form-input" id="ai-link" placeholder="https://example.com/product (or #)" />
+      </div>
+      <div class="form-group">
         <label class="form-label" for="ai-price">Price per unit ($) — optional</label>
         <input type="number" class="form-input" id="ai-price" placeholder="e.g. 5.99" min="0" step="0.01" />
       </div>
@@ -397,6 +411,8 @@ function openAddItemModal() {
         reminderDate = customRem?.value || null;
       }
 
+      const linkVal = overlay.querySelector('#ai-link').value.trim() || '#';
+
       const result = addChecklistItem({
         name,
         category: overlay.querySelector('#ai-category').value,
@@ -405,6 +421,7 @@ function openAddItemModal() {
         brand:    overlay.querySelector('#ai-brand').value.trim() || 'Any Brand',
         priority: overlay.querySelector('.priority-btn.active')?.dataset.priority || 'Medium',
         reminderDate,
+        link:     linkVal,
         price:    overlay.querySelector('#ai-price').value ? parseFloat(overlay.querySelector('#ai-price').value) : null,
         notes:    overlay.querySelector('#ai-notes').value.trim(),
       });
@@ -462,6 +479,10 @@ function openEditItemModal(item) {
         <input type="date" class="form-input" id="ei-reminder" value="${item.reminderDate || ''}" />
       </div>
       <div class="form-group">
+        <label class="form-label" for="ei-link">Item Link / URL</label>
+        <input type="url" class="form-input" id="ei-link" value="${item.link || ''}" placeholder="https://example.com/product (or #)" />
+      </div>
+      <div class="form-group">
         <label class="form-label" for="ei-price">Price per unit ($)</label>
         <input type="number" class="form-input" id="ei-price" value="${item.price || ''}" min="0" step="0.01" />
       </div>
@@ -501,6 +522,7 @@ function openEditItemModal(item) {
         brand:        overlay.querySelector('#ei-brand').value.trim() || 'Any Brand',
         priority:     overlay.querySelector('.priority-btn.active')?.dataset.priority || 'Medium',
         reminderDate: overlay.querySelector('#ei-reminder').value || null,
+        link:         overlay.querySelector('#ei-link').value.trim() || '#',
         price:        overlay.querySelector('#ei-price').value ? parseFloat(overlay.querySelector('#ei-price').value) : null,
         notes:        overlay.querySelector('#ei-notes').value.trim(),
       });

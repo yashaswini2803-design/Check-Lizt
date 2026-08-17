@@ -170,23 +170,38 @@ function renderItemsGrid(items, brands, slug, categoryName, isFiltered = false) 
    ──────────────────────────────────────────────────────────── */
 function buildItemCard(item, brands, categoryName, index) {
   const cardId = `card-${item.name.replace(/\s+/g, '-').toLowerCase()}`;
+  const itemLink = item.link || '#';
+  const targetAttr = (itemLink && itemLink !== '#') ? 'target="_blank" rel="noopener noreferrer"' : '';
 
   return `
     <div class="item-card fade-in stagger-item" id="${cardId}" data-item-name="${item.name}">
 
-      <!-- Image -->
+      <!-- Image with locked 1:1 Aspect Ratio and href link -->
       <div class="item-card-image">
-        <div class="img-fallback" aria-label="${item.name} illustration">
-          <span style="font-size:60px">${item.emoji}</span>
-        </div>
+        <a href="${itemLink}" class="item-card-image-link" ${targetAttr} aria-label="${item.name} link">
+          ${item.image ? `<img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />` : ''}
+          <div class="img-fallback" aria-label="${item.name} illustration" style="${item.image ? 'display:none;' : ''}">
+            <span style="font-size:60px">${item.emoji}</span>
+          </div>
+        </a>
       </div>
 
       <div class="item-card-body">
 
-        <!-- Name + desc -->
+        <!-- Name (with href link) + desc -->
         <div>
-          <div class="item-card-name">${item.name}</div>
+          <div class="item-card-name-row">
+            <a href="${itemLink}" class="item-name-link" ${targetAttr} title="Open link for ${item.name}">
+              <span class="item-card-name">${item.name}</span>
+              <span class="external-link-badge" aria-hidden="true">🔗</span>
+            </a>
+          </div>
           <div class="item-card-desc">${item.desc}</div>
+          <div class="item-link-container">
+            <a href="${itemLink}" class="item-product-link" ${targetAttr}>
+              <span>🔗</span> ${itemLink !== '#' ? 'Visit Product Link' : 'Product Link (Insert URL)'}
+            </a>
+          </div>
         </div>
 
         <!-- Quantity -->
@@ -376,7 +391,7 @@ function bindItemCardEvents(item, brands, categoryName) {
     const priceInput = card.querySelector(`#price-${cardId}`);
     const price = priceInput?.value ? parseFloat(priceInput.value) : null;
 
-    // Add to checklist
+    // Add to checklist (preserves item link and image)
     const result = addChecklistItem({
       name,
       category: categoryName,
@@ -386,6 +401,8 @@ function bindItemCardEvents(item, brands, categoryName) {
       priority,
       reminderDate,
       price,
+      link:     item.link || '#',
+      image:    item.image || '',
     });
 
     // Show toast
@@ -467,6 +484,8 @@ function renderSuggestionStrip(suggestions, lastAdded) {
           unit:     foundItem.unit || '',
           brand:    'Any Brand',
           priority: 'Medium',
+          link:     foundItem.link || '#',
+          image:    foundItem.image || '',
         });
 
         if (result.added) {
