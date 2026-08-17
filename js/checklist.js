@@ -185,6 +185,7 @@ function renderChecklistGroups(active, done) {
 function renderChecklistItem(item) {
   const prioClasses = { High: 'badge-high', Medium: 'badge-medium', Low: 'badge-low' };
   const itemLink = item.link || '#';
+  const itemImage = item.image || '';
   const hasCustomLink = itemLink && itemLink !== '#';
 
   return `
@@ -198,6 +199,11 @@ function renderChecklistItem(item) {
           aria-label="${item.completed ? 'Mark as not purchased' : 'Mark as purchased'}: ${item.name}"
         />
       </div>
+      ${itemImage ? `
+        <div class="checklist-item-thumb">
+          <img src="${itemImage}" alt="${item.name}" loading="lazy" onerror="this.parentElement.style.display='none';" />
+        </div>
+      ` : ''}
       <div class="checklist-item-content">
         <div class="checklist-item-name">
           <a href="${itemLink}" class="checklist-item-link" ${hasCustomLink ? 'target="_blank" rel="noopener noreferrer"' : ''} title="${hasCustomLink ? 'Open product link' : 'Item link'}">
@@ -361,6 +367,10 @@ function openAddItemModal() {
         <input type="url" class="form-input" id="ai-link" placeholder="https://example.com/product (or #)" />
       </div>
       <div class="form-group">
+        <label class="form-label" for="ai-image">Image Source / Path (<code>img src</code>)</label>
+        <input type="text" class="form-input" id="ai-image" placeholder="images/items/...jpg or https://..." />
+      </div>
+      <div class="form-group">
         <label class="form-label" for="ai-price">Price per unit ($) — optional</label>
         <input type="number" class="form-input" id="ai-price" placeholder="e.g. 5.99" min="0" step="0.01" />
       </div>
@@ -412,6 +422,7 @@ function openAddItemModal() {
       }
 
       const linkVal = overlay.querySelector('#ai-link').value.trim() || '#';
+      const imageVal = overlay.querySelector('#ai-image').value.trim() || '';
 
       const result = addChecklistItem({
         name,
@@ -422,6 +433,7 @@ function openAddItemModal() {
         priority: overlay.querySelector('.priority-btn.active')?.dataset.priority || 'Medium',
         reminderDate,
         link:     linkVal,
+        image:    imageVal,
         price:    overlay.querySelector('#ai-price').value ? parseFloat(overlay.querySelector('#ai-price').value) : null,
         notes:    overlay.querySelector('#ai-notes').value.trim(),
       });
@@ -483,6 +495,10 @@ function openEditItemModal(item) {
         <input type="url" class="form-input" id="ei-link" value="${item.link || ''}" placeholder="https://example.com/product (or #)" />
       </div>
       <div class="form-group">
+        <label class="form-label" for="ei-image">Image Source / Path (<code>img src</code>)</label>
+        <input type="text" class="form-input" id="ei-image" value="${item.image || ''}" placeholder="images/items/...jpg or https://..." />
+      </div>
+      <div class="form-group">
         <label class="form-label" for="ei-price">Price per unit ($)</label>
         <input type="number" class="form-input" id="ei-price" value="${item.price || ''}" min="0" step="0.01" />
       </div>
@@ -523,6 +539,7 @@ function openEditItemModal(item) {
         priority:     overlay.querySelector('.priority-btn.active')?.dataset.priority || 'Medium',
         reminderDate: overlay.querySelector('#ei-reminder').value || null,
         link:         overlay.querySelector('#ei-link').value.trim() || '#',
+        image:        overlay.querySelector('#ei-image').value.trim() || '',
         price:        overlay.querySelector('#ei-price').value ? parseFloat(overlay.querySelector('#ei-price').value) : null,
         notes:        overlay.querySelector('#ei-notes').value.trim(),
       });

@@ -171,16 +171,25 @@ function renderItemsGrid(items, brands, slug, categoryName, isFiltered = false) 
 function buildItemCard(item, brands, categoryName, index) {
   const cardId = `card-${item.name.replace(/\s+/g, '-').toLowerCase()}`;
   const itemLink = item.link || '#';
+  const itemImage = item.image || '';
   const targetAttr = (itemLink && itemLink !== '#') ? 'target="_blank" rel="noopener noreferrer"' : '';
 
   return `
     <div class="item-card fade-in stagger-item" id="${cardId}" data-item-name="${item.name}">
 
-      <!-- Image with locked 1:1 Aspect Ratio and href link -->
+      <!-- Image with locked 1:1 Aspect Ratio, img src, and href link -->
       <div class="item-card-image">
         <a href="${itemLink}" class="item-card-image-link" ${targetAttr} aria-label="${item.name} link">
-          ${item.image ? `<img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />` : ''}
-          <div class="img-fallback" aria-label="${item.name} illustration" style="${item.image ? 'display:none;' : ''}">
+          <img
+            class="item-img"
+            id="img-${cardId}"
+            src="${itemImage}"
+            alt="${item.name}"
+            loading="lazy"
+            onerror="this.style.display='none'; document.getElementById('fallback-${cardId}').style.display='flex';"
+            style="${!itemImage ? 'display:none;' : ''}"
+          />
+          <div class="img-fallback" id="fallback-${cardId}" aria-label="${item.name} illustration" style="${itemImage ? 'display:none;' : 'display:flex;'}">
             <span style="font-size:60px">${item.emoji}</span>
           </div>
         </a>
@@ -202,6 +211,23 @@ function buildItemCard(item, brands, categoryName, index) {
               <span>🔗</span> ${itemLink !== '#' ? 'Visit Product Link' : 'Product Link (Insert URL)'}
             </a>
           </div>
+        </div>
+
+        <!-- Image Source / Insert Image Field -->
+        <div class="form-group image-input-group">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <label class="form-label" style="margin:0; font-size:11px;" for="custom-img-${cardId}">Image Source (<code>img src</code>)</label>
+            <button type="button" class="btn-toggle-img-input" data-card-id="${cardId}" style="background:none; border:none; color:var(--cherry); font-size:11px; cursor:pointer; font-weight:600; padding:0;">Insert Image ▾</button>
+          </div>
+          <input
+            type="text"
+            class="form-input custom-img-input"
+            id="custom-img-${cardId}"
+            value="${itemImage}"
+            placeholder="e.g. images/items/...jpg or https://..."
+            aria-label="Image source URL for ${item.name}"
+            style="font-size:11.5px; padding:6px 10px; display:none;"
+          />
         </div>
 
         <!-- Quantity -->
@@ -306,6 +332,33 @@ function bindItemCardEvents(item, brands, categoryName) {
   const card   = document.getElementById(cardId);
   if (!card) return;
 
+  // Toggle Image input field
+  const toggleImgBtn = card.querySelector(`.btn-toggle-img-input[data-card-id="${cardId}"]`);
+  const customImgInput = card.querySelector(`#custom-img-${cardId}`);
+  const imgEl = card.querySelector(`#img-${cardId}`);
+  const fallbackEl = card.querySelector(`#fallback-${cardId}`);
+
+  toggleImgBtn?.addEventListener('click', () => {
+    const isHidden = customImgInput.style.display === 'none';
+    customImgInput.style.display = isHidden ? 'block' : 'none';
+    toggleImgBtn.textContent = isHidden ? 'Hide Image Field ▴' : 'Insert Image ▾';
+    if (isHidden) customImgInput.focus();
+  });
+
+  // Real-time image src update
+  customImgInput?.addEventListener('input', () => {
+    const val = customImgInput.value.trim();
+    if (val) {
+      imgEl.src = val;
+      imgEl.style.display = 'block';
+      fallbackEl.style.display = 'none';
+    } else {
+      imgEl.src = '';
+      imgEl.style.display = 'none';
+      fallbackEl.style.display = 'flex';
+    }
+  });
+
   // Quantity stepper
   const qtyEl  = card.querySelector(`#qty-${cardId}`);
   const minusBtn = card.querySelector('.qty-minus');
@@ -391,6 +444,9 @@ function bindItemCardEvents(item, brands, categoryName) {
     const priceInput = card.querySelector(`#price-${cardId}`);
     const price = priceInput?.value ? parseFloat(priceInput.value) : null;
 
+    // Get current image source
+    const currentImg = customImgInput?.value.trim() || item.image || '';
+
     // Add to checklist (preserves item link and image)
     const result = addChecklistItem({
       name,
@@ -402,7 +458,7 @@ function bindItemCardEvents(item, brands, categoryName) {
       reminderDate,
       price,
       link:     item.link || '#',
-      image:    item.image || '',
+      image:    currentImg,
     });
 
     // Show toast

@@ -676,6 +676,25 @@
   color: var(--text-muted);
 }
 
+/* Checklist item thumbnail */
+.checklist-item-thumb {
+  width: 44px;
+  height: 44px;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg-secondary);
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.06);
+}
+.checklist-item-thumb img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
 /* Custom clay checkbox */
 .item-checkbox-wrap { flex-shrink: 0; margin-top: 2px; }
 

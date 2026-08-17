@@ -2,9 +2,9 @@
 
 A smart, responsive checklist web application designed to organize shopping for every space in your home and office.
 
-## 🔗 How to Insert Your Links & Images
+## 🖼️ How to Insert Images (`img src`) & Links (`href`)
 
-All sections (categories) and items now support custom `href` links and image URLs with locked, uniform 1:1 aspect ratios.
+Every section and item has explicit `<img src="...">` and `<a href="...">` support with locked, uniform 1:1 aspect ratios.
 
 ### 1. In `js/data.js`
 
@@ -17,12 +17,12 @@ kitchen: {
   icon: '🍳',
   slug: 'kitchen',
   desc: '...',
-  link: 'category/kitchen.html', // Insert custom URL here
-  image: 'images/categories/kitchen.jpg' // Optional custom image
+  link: 'category/kitchen.html',           // <--- Insert custom link
+  image: 'images/categories/kitchen.jpg'  // <--- Insert category image path / URL
 }
 ```
 
-#### Items (Toothpaste, Rice, Cooking Oil, etc.):
+#### Items (Toothpaste, Rice, Cooking Oil, Soap, etc.):
 ```javascript
 {
   name: 'Toothpaste',
@@ -31,16 +31,17 @@ kitchen: {
   tags: 'essentials',
   defaultQty: 2,
   unit: '',
-  link: 'https://www.your-link-here.com/toothpaste', // <--- Paste your link here
-  image: 'https://example.com/toothpaste.jpg'         // <--- Paste your image URL here
+  link: 'https://example.com/toothpaste',      // <--- Paste product link here
+  image: 'images/items/toothpaste.jpg'         // <--- Paste image path or URL here
 }
 ```
 
-### 2. In the App UI (Checklist Page)
-When adding or editing an item on the **My Checklist** page (`checklist.html`), you can directly enter an **Item Link / URL** in the modal form.
+### 2. Live in the Web Interface:
+- **On Category Pages**: Every item card has an **`Insert Image ▾`** button. Click it to paste any image URL or local path (`img src`) with instant real-time live preview.
+- **On the Checklist Page (`checklist.html`)**: When adding or editing an item, you can type/paste both the **Item Link** and **Image Source (`img src`)**.
 
 ---
 
-## 🎨 Consistent Image Ratios
-- All item and category cards are styled with `aspect-ratio: 1 / 1` and `object-fit: cover` to guarantee uniform sizing across all devices and browsers.
-- If no image is provided, an aesthetic emoji illustration fallback is automatically displayed.
+## 🎨 Uniform 1:1 Image Ratio
+- All item and category images are styled with `aspect-ratio: 1 / 1` and `object-fit: cover` to guarantee clean, identical proportions.
+- If an image path is empty or loading fails, an aesthetic emoji illustration fallback is automatically displayed.
