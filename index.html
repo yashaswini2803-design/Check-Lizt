@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Lizt — Never Forget What You Need</title>
+  <meta name="description" content="Smart Lizt helps you discover, organize and remember everything you need to buy. Create smart shopping checklists for every space in your life." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+
+  <!-- Navbar will be injected here -->
+  <div id="navbar-placeholder"></div>
+
+  <main class="page-content" id="main-content">
+
+    <!-- ══════════════════════════════════════════
+         HERO SECTION
+    ══════════════════════════════════════════ -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-inner">
+
+          <!-- Left: Text -->
+          <div class="hero-text fade-in">
+            <div class="hero-eyebrow" aria-hidden="true">
+              <span>✓</span> Smart Shopping Assistant
+            </div>
+            <h1 class="hero-title" id="hero-heading">
+              Never Forget<br/>
+              <span class="gradient-text">What You Need.</span>
+            </h1>
+            <p class="hero-desc">
+              Smart Lizt helps you discover, organize and remember everything you need to buy — organized by every space in your life.
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-lg" id="hero-create-btn" aria-label="Create your shopping checklist">
+                🛒 Create Checklist
+              </button>
+              <button class="btn btn-outline btn-lg" id="hero-explore-btn" aria-label="Explore shopping categories">
+                ⊞ Explore Categories
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Illustration -->
+          <div class="hero-illustration" aria-hidden="true">
+            <div class="hero-illustration-inner">
+              <div class="hero-list-title">
+                <span>🛒 My Smart Lizt</span>
+                <span style="font-size:13px; color:var(--gold); font-weight:600;">4 items</span>
+              </div>
+              <div class="hero-list-preview">
+                <div class="hero-list-item done">
+                  <div class="hero-list-check done">✓</div>
+                  <span class="hero-list-item-name">Cooking Oil</span>
+                  <span class="hero-list-tag">Kitchen</span>
+                </div>
+                <div class="hero-list-item done">
+                  <div class="hero-list-check done">✓</div>
+                  <span class="hero-list-item-name">Toothpaste</span>
+                  <span class="hero-list-tag">Bathroom</span>
+                </div>
+                <div class="hero-list-item">
+                  <div class="hero-list-check pending"></div>
+                  <span class="hero-list-item-name">Rice <small style="color:var(--text-muted)">5kg</small></span>
+                  <span class="hero-list-tag badge-high" style="padding:2px 8px; border-radius:999px; font-size:11px; font-weight:600; background:rgba(255,107,107,0.15); color:#FF6B6B; border:1px solid rgba(255,107,107,0.3)">High</span>
+                </div>
+                <div class="hero-list-item">
+                  <div class="hero-list-check pending"></div>
+                  <span class="hero-list-item-name">Washing Powder</span>
+                  <span class="hero-list-tag">Laundry</span>
+                </div>
+              </div>
+              <div class="hero-progress-bar">
+                <div class="hero-progress-label">
+                  Shopping Progress <span>50%</span>
+                </div>
+                <div class="hero-progress-track">
+                  <div class="hero-progress-fill"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         QUICK STATS
+    ══════════════════════════════════════════ -->
+    <section class="section" aria-labelledby="stats-heading">
+      <div class="container">
+        <div class="stat-cards">
+          <div class="stat-card">
+            <div class="stat-card-icon" aria-hidden="true">⏳</div>
+            <div class="stat-card-value" id="stat-remaining" aria-label="Items to buy">0</div>
+            <div class="stat-card-label">Items to Buy</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon" aria-hidden="true">✓</div>
+            <div class="stat-card-value" id="stat-completed" aria-label="Completed items">0</div>
+            <div class="stat-card-label">Completed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon" aria-hidden="true">🔔</div>
+            <div class="stat-card-value" id="stat-reminders" aria-label="Active reminders">0</div>
+            <div class="stat-card-label">Active Reminders</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon" aria-hidden="true">⊞</div>
+            <div class="stat-card-value" id="stat-categories" aria-label="Categories">10</div>
+            <div class="stat-card-label">Categories</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         WIZARD PROMO STRIP
+    ══════════════════════════════════════════ -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="wizard-promo">
+          <div class="wizard-promo-text">
+            <h3>Not sure what you need?</h3>
+            <p>Let Smart Lizt help. Tell us where you're shopping and we'll suggest the perfect checklist automatically.</p>
+            <button class="btn btn-primary" id="wizard-btn" style="margin-top:20px" aria-label="Open the help me build a list wizard">
+              ✨ Help Me Build a Lizt
+            </button>
+          </div>
+          <div class="wizard-promo-icon" aria-hidden="true">🛍️</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SHOP BY SPACE
+    ══════════════════════════════════════════ -->
+    <section class="section" id="categories-section" aria-labelledby="categories-heading">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-eyebrow">Discover</div>
+            <h2 id="categories-heading">Shop by Space</h2>
+            <p style="margin-top:8px; color:var(--text-muted); font-size:14px">
+              Select a room or area to see everything you may need.
+            </p>
+          </div>
+          <a href="categories.html" class="btn btn-ghost btn-sm" aria-label="View all categories">
+            View All →
+          </a>
+        </div>
+
+        <div class="category-grid" id="category-preview-grid" role="list" aria-label="Shopping categories">
+          <!-- Rendered by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         HOW IT WORKS
+    ══════════════════════════════════════════ -->
+    <section class="section" aria-labelledby="how-heading">
+      <div class="container">
+        <div class="section-header" style="margin-bottom:var(--space-8)">
+          <div>
+            <div class="section-eyebrow">Simple & Smart</div>
+            <h2 id="how-heading">Choose a space. Build your Lizt. Shop smarter.</h2>
+          </div>
+        </div>
+        <div class="how-it-works-grid">
+          <div class="how-step-card fade-in stagger-item">
+            <div class="how-step-number">1</div>
+            <h3>Choose a Space</h3>
+            <p>Pick a room or area — kitchen, bathroom, bedroom and more.</p>
+          </div>
+          <div class="how-step-card fade-in stagger-item">
+            <div class="how-step-number">2</div>
+            <h3>Customize Items</h3>
+            <p>Set quantity, brand, priority and reminders for each item.</p>
+          </div>
+          <div class="how-step-card fade-in stagger-item">
+            <div class="how-step-number">3</div>
+            <h3>Shop &amp; Track</h3>
+            <p>Mark items as purchased and let reminders keep you on track.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer will be injected here -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts: load order matters -->
+  <script src="js/storage.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

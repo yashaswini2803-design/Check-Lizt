@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Smart Lizt â€” Shopping Checklist</title>
+  <meta name="description" content="View and manage your personal Smart Lizt shopping checklist. Track progress, set reminders, and never forget what you need." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <main class="page-content" id="main-content">
+    <div class="container">
+
+      <!-- Page Header -->
+      <div class="checklist-header">
+        <div class="checklist-title-group">
+          <h1>My Smart Lizt</h1>
+          <p class="checklist-subtitle" id="checklist-subtitle">Your personal shopping checklist</p>
+        </div>
+        <div class="checklist-actions-bar">
+          <button class="btn btn-primary" id="add-item-btn" aria-label="Add a custom item">+ Add Item</button>
+          <button class="btn btn-ghost btn-sm" id="share-btn" aria-label="Share your checklist">ðŸ“¤ Share</button>
+          <button class="btn btn-ghost btn-sm" id="export-btn" aria-label="Export checklist as text file">ðŸ“¥ Export</button>
+          <button class="btn btn-ghost btn-sm" id="clear-completed-btn" aria-label="Clear all completed items">Clear Done</button>
+          <button class="btn btn-danger btn-sm" id="delete-all-btn" aria-label="Delete all items">Delete All</button>
+        </div>
+      </div>
+
+      <!-- Summary pills -->
+      <div id="summary-pills" class="checklist-summary-row"></div>
+
+      <!-- Progress bar -->
+      <div id="progress-section"></div>
+
+      <!-- Two-column layout -->
+      <div class="checklist-layout">
+
+        <!-- Main checklist -->
+        <div>
+          <div id="checklist-groups">
+            <!-- Rendered by checklist.js -->
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="checklist-sidebar">
+          <div id="budget-sidebar"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/checklist.js"></script>
+
+</body>
+</html>

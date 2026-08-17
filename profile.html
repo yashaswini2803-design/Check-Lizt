@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile â€” Smart Lizt</title>
+  <meta name="description" content="Manage your Smart Lizt profile and preferences." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <main class="page-content" id="main-content">
+    <div class="container">
+
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <div class="profile-avatar" aria-label="User avatar">S</div>
+        <div>
+          <h1 class="profile-name">Smart Lizt User</h1>
+          <p class="profile-sub">Your shopping assistant is ready</p>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="stat-cards" style="margin-bottom:var(--space-8)">
+        <div class="stat-card">
+          <div class="stat-card-icon" aria-hidden="true">â³</div>
+          <div class="stat-card-value" id="ps-remaining">â€”</div>
+          <div class="stat-card-label">Items Remaining</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" aria-hidden="true">âœ“</div>
+          <div class="stat-card-value" id="ps-completed">â€”</div>
+          <div class="stat-card-label">Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" aria-hidden="true">ðŸ””</div>
+          <div class="stat-card-value" id="ps-reminders">â€”</div>
+          <div class="stat-card-label">Reminders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" aria-hidden="true">ðŸ”´</div>
+          <div class="stat-card-value" id="ps-highpri">â€”</div>
+          <div class="stat-card-label">High Priority</div>
+        </div>
+      </div>
+
+      <!-- Preferences -->
+      <div class="profile-grid">
+
+        <!-- Preferences -->
+        <div class="profile-section">
+          <div class="profile-section-title">âš™ï¸ Preferences</div>
+
+          <div class="profile-pref-row">
+            <div>
+              <div class="profile-pref-label">Notifications</div>
+              <div class="profile-pref-sub">Show reminder alerts</div>
+            </div>
+            <label class="toggle" aria-label="Toggle notifications">
+              <input type="checkbox" id="pref-notifications" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="profile-pref-row">
+            <div>
+              <div class="profile-pref-label">Auto Suggestions</div>
+              <div class="profile-pref-sub">Show related item suggestions</div>
+            </div>
+            <label class="toggle" aria-label="Toggle auto suggestions">
+              <input type="checkbox" id="pref-suggestions" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="profile-pref-row">
+            <div>
+              <div class="profile-pref-label">Default Reminder</div>
+              <div class="profile-pref-sub">Applied when no reminder is set</div>
+            </div>
+            <select class="form-select" id="pref-default-reminder" style="width:auto" aria-label="Default reminder duration">
+              <option value="none">None</option>
+              <option value="7">1 Week</option>
+              <option value="14">2 Weeks</option>
+              <option value="30">1 Month</option>
+            </select>
+          </div>
+
+          <div class="profile-pref-row">
+            <div>
+              <div class="profile-pref-label">Default Quantity</div>
+              <div class="profile-pref-sub">Default count for new items</div>
+            </div>
+            <input type="number" class="form-input" id="pref-default-qty"
+                   min="1" max="99" style="width:80px; text-align:center"
+                   aria-label="Default quantity" />
+          </div>
+        </div>
+
+        <!-- Data Management -->
+        <div class="profile-section">
+          <div class="profile-section-title">ðŸ—„ï¸ Data</div>
+
+          <div class="profile-pref-row" style="flex-direction:column; align-items:flex-start; gap:8px">
+            <div class="profile-pref-label">Storage</div>
+            <p style="font-size:13px; color:var(--text-muted); line-height:1.6">
+              Smart Lizt stores all your data locally in your browser. Your data never leaves your device.
+            </p>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="profile-pref-row" style="flex-direction:column; align-items:flex-start; gap:12px">
+            <div>
+              <div class="profile-pref-label">Clear All Data</div>
+              <div class="profile-pref-sub" style="color:var(--danger)">This cannot be undone</div>
+            </div>
+            <button class="btn btn-danger btn-sm" id="clear-data-btn" aria-label="Clear all app data">
+              ðŸ—‘ Clear All Data
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="profile-section">
+          <div class="profile-section-title">ðŸ”— Quick Links</div>
+          <div style="display:flex; flex-direction:column; gap:8px; margin-top:8px">
+            <a href="checklist.html" class="btn btn-ghost" style="justify-content:flex-start">ðŸ›’ My Checklist</a>
+            <a href="reminders.html" class="btn btn-ghost" style="justify-content:flex-start">ðŸ”” Reminders</a>
+            <a href="history.html" class="btn btn-ghost" style="justify-content:flex-start">ðŸ• History</a>
+            <a href="categories.html" class="btn btn-ghost" style="justify-content:flex-start">âŠž Categories</a>
+          </div>
+        </div>
+
+        <!-- About -->
+        <div class="profile-section">
+          <div class="profile-section-title">â„¹ï¸ About Smart Lizt</div>
+          <p style="font-size:14px; color:var(--text-muted); line-height:1.8; margin-top:8px">
+            Smart Lizt is your intelligent shopping companion â€” helping you discover, organize and remember everything you need to buy, organized for every space in your life.
+          </p>
+          <div class="divider"></div>
+          <div style="font-size:13px; color:var(--text-muted)">
+            <div>Version 1.0.0</div>
+            <div style="margin-top:4px">Â© 2026 Smart Lizt. All rights reserved.</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/profile.js"></script>
+
+</body>
+</html>

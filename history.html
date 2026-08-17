@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping History â€” Smart Lizt</title>
+  <meta name="description" content="View your Smart Lizt shopping history. Re-add previously purchased items to your checklist in one click." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <main class="page-content" id="main-content">
+    <div class="container">
+
+      <div style="margin-bottom:var(--space-6)">
+        <div class="section-eyebrow">Shopping History</div>
+        <h1>Purchase History</h1>
+        <p id="history-subtitle" style="margin-top:8px; color:var(--text-muted); font-size:14px">Loading...</p>
+      </div>
+
+      <div id="history-container">
+        <!-- Rendered by history.js -->
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/history.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Reminders â€” Smart Lizt</title>
+  <meta name="description" content="View and manage your Smart Lizt reminders. Get notified when it's time to restock items." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <main class="page-content" id="main-content">
+    <div class="container">
+
+      <div style="margin-bottom:var(--space-6)">
+        <div class="section-eyebrow">Smart Reminders</div>
+        <h1>Your Reminders</h1>
+        <p id="reminders-subtitle" style="margin-top:8px; color:var(--text-muted); font-size:14px">Loading...</p>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="reminders-filter-row" role="group" aria-label="Filter reminders">
+        <button class="filter-tab active" onclick="filterReminders(this, 'all')" id="filter-all">All</button>
+        <button class="filter-tab" onclick="filterReminders(this, 'overdue')" id="filter-overdue">ðŸ”´ Overdue</button>
+        <button class="filter-tab" onclick="filterReminders(this, 'today')" id="filter-today">ðŸŸ¡ Today</button>
+        <button class="filter-tab" onclick="filterReminders(this, 'upcoming')" id="filter-upcoming">ðŸŸ¢ Upcoming</button>
+      </div>
+
+      <!-- Overdue -->
+      <div id="overdue-section" style="display:none; margin-bottom:var(--space-8)">
+        <div class="section-header" style="margin-bottom:var(--space-4)">
+          <h2 class="reminder-section-title" style="font-size:18px; color:var(--danger)">ðŸ”´ Overdue</h2>
+        </div>
+        <div class="reminders-grid"></div>
+      </div>
+
+      <!-- Due Today -->
+      <div id="today-section" style="display:none; margin-bottom:var(--space-8)">
+        <div class="section-header" style="margin-bottom:var(--space-4)">
+          <h2 class="reminder-section-title" style="font-size:18px; color:var(--gold)">ðŸŸ¡ Due Today</h2>
+        </div>
+        <div class="reminders-grid"></div>
+      </div>
+
+      <!-- Upcoming -->
+      <div id="upcoming-section" style="display:none; margin-bottom:var(--space-8)">
+        <div class="section-header" style="margin-bottom:var(--space-4)">
+          <h2 class="reminder-section-title" style="font-size:18px; color:var(--success)">ðŸŸ¢ Upcoming</h2>
+        </div>
+        <div class="reminders-grid"></div>
+      </div>
+
+      <!-- All empty state fallback -->
+      <div id="all-reminders-grid"></div>
+
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/reminders.js"></script>
+  <script>
+    function filterReminders(btn, type) {
+      document.querySelectorAll('.reminders-filter-row .filter-tab').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      const sections = { overdue: 'overdue-section', today: 'today-section', upcoming: 'upcoming-section' };
+
+      if (type === 'all') {
+        Object.values(sections).forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = el.querySelector('.reminders-grid')?.children.length ? 'block' : 'none';
+        });
+      } else {
+        Object.entries(sections).forEach(([key, id]) => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = key === type ? 'block' : 'none';
+        });
+      }
+    }
+  </script>
+
+</body>
+</html>

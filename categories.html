@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Categories â€” Smart Lizt</title>
+  <meta name="description" content="Browse all Smart Lizt shopping categories â€” kitchen, bathroom, bedroom, office and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <main class="page-content" id="main-content">
+    <div class="container">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep" aria-hidden="true">â€º</span>
+        <span class="breadcrumb-current">Categories</span>
+      </nav>
+
+      <div style="margin-bottom:var(--space-8)">
+        <div class="section-eyebrow">Explore</div>
+        <h1>All Categories</h1>
+        <p style="margin-top:8px; color:var(--text-muted); font-size:14px">
+          Choose a space to discover everything you may need.
+        </p>
+      </div>
+
+      <div class="categories-grid-full" id="all-categories-grid" role="list" aria-label="All shopping categories">
+        <!-- Rendered by JS -->
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initDemoData();
+      renderNavbar('categories', '');
+      renderFooter('');
+
+      const grid = document.getElementById('all-categories-grid');
+      if (grid) {
+        grid.innerHTML = Object.entries(CATEGORIES)
+          .map(([slug, meta]) => renderCategoryCard(slug, meta, `category/${slug}.html`))
+          .join('');
+      }
+    });
+  </script>
+
+</body>
+</html>
