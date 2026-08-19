@@ -39,6 +39,8 @@ function renderCategoryHeader(slug, meta) {
   const header = document.getElementById('category-header');
   if (!header) return;
 
+  const imageSrc = meta.image ? `../${meta.image}` : '';
+
   header.innerHTML = `
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="../index.html">Home</a>
@@ -47,8 +49,14 @@ function renderCategoryHeader(slug, meta) {
       <span class="breadcrumb-sep" aria-hidden="true">›</span>
       <span class="breadcrumb-current">${meta.name}</span>
     </nav>
-    <div class="category-page-hero">
-      <div class="category-page-icon" aria-hidden="true">${meta.icon}</div>
+    <div class="category-page-hero" style="display:flex; align-items:center; gap:20px;">
+      ${imageSrc ? `
+        <div class="category-page-thumb" style="width:110px; height:110px; flex-shrink:0; border-radius:16px; overflow:hidden; box-shadow:var(--shadow-md, 0 4px 12px rgba(0,0,0,0.15)); border:2px solid rgba(255,255,255,0.8);">
+          <img src="${imageSrc}" alt="${meta.name}" style="width:100%; height:100%; object-fit:cover;" onerror="this.parentElement.style.display='none';" />
+        </div>
+      ` : `
+        <div class="category-page-icon" aria-hidden="true">${meta.icon}</div>
+      `}
       <div>
         <h1 class="category-page-title">${meta.name} Essentials</h1>
         <p class="category-page-desc">${meta.desc}</p>
