@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Reminders â€” Smart Lizt</title>
+  <title>Smart Reminders — Smart Lizt</title>
   <meta name="description" content="View and manage your Smart Lizt reminders. Get notified when it's time to restock items." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -27,15 +27,15 @@
       <!-- Filter tabs -->
       <div class="reminders-filter-row" role="group" aria-label="Filter reminders">
         <button class="filter-tab active" onclick="filterReminders(this, 'all')" id="filter-all">All</button>
-        <button class="filter-tab" onclick="filterReminders(this, 'overdue')" id="filter-overdue">ðŸ”´ Overdue</button>
-        <button class="filter-tab" onclick="filterReminders(this, 'today')" id="filter-today">ðŸŸ¡ Today</button>
-        <button class="filter-tab" onclick="filterReminders(this, 'upcoming')" id="filter-upcoming">ðŸŸ¢ Upcoming</button>
+        <button class="filter-tab" onclick="filterReminders(this, 'overdue')" id="filter-overdue">🔴 Overdue</button>
+        <button class="filter-tab" onclick="filterReminders(this, 'today')" id="filter-today">🟡 Today</button>
+        <button class="filter-tab" onclick="filterReminders(this, 'upcoming')" id="filter-upcoming">🟢 Upcoming</button>
       </div>
 
       <!-- Overdue -->
       <div id="overdue-section" style="display:none; margin-bottom:var(--space-8)">
         <div class="section-header" style="margin-bottom:var(--space-4)">
-          <h2 class="reminder-section-title" style="font-size:18px; color:var(--danger)">ðŸ”´ Overdue</h2>
+          <h2 class="reminder-section-title" style="font-size:18px; color:var(--danger)">🔴 Overdue</h2>
         </div>
         <div class="reminders-grid"></div>
       </div>
@@ -43,7 +43,7 @@
       <!-- Due Today -->
       <div id="today-section" style="display:none; margin-bottom:var(--space-8)">
         <div class="section-header" style="margin-bottom:var(--space-4)">
-          <h2 class="reminder-section-title" style="font-size:18px; color:var(--gold)">ðŸŸ¡ Due Today</h2>
+          <h2 class="reminder-section-title" style="font-size:18px; color:var(--gold)">🟡 Due Today</h2>
         </div>
         <div class="reminders-grid"></div>
       </div>
@@ -51,7 +51,7 @@
       <!-- Upcoming -->
       <div id="upcoming-section" style="display:none; margin-bottom:var(--space-8)">
         <div class="section-header" style="margin-bottom:var(--space-4)">
-          <h2 class="reminder-section-title" style="font-size:18px; color:var(--success)">ðŸŸ¢ Upcoming</h2>
+          <h2 class="reminder-section-title" style="font-size:18px; color:var(--success)">🟢 Upcoming</h2>
         </div>
         <div class="reminders-grid"></div>
       </div>
